@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: spt-provider-user
+  datasource:
+    druid:
+      url: jdbc:mysql://192.168.223.128:3306/user?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: 123456-abc
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: true
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.67.78.82:8848
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:8080
+
+server:
+  port: 9502
+
+mybatis:
+    type-aliases-package: com.msunsoft.spt.oauth2.domain.user
+    mapper-locations: classpath:mapper/user/*.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

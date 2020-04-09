@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: spt-oauth2-consumer-reg
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.67.78.82:8848
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:8080
+
+server:
+  port: 10205
+
+feign:
+  sentinel:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
