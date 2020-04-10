@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <groupId>com.msunsoft</groupId>
+    <artifactId>msunsoftmicroservice</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+
+    <modules>
+        <module>spt-dependencies</module>
+        <module>spt-external-skywalking</module>
+        <module>spt-commons</module>
+        <module>spt-commons-domain</module>
+        <module>spt-commons-mapper</module>
+        <module>spt-commons-service</module>
+        <module>spt-provider</module>
+        <module>spt-database</module>
+        <module>spt-business</module>
+        <module>spt-service-gateway</module>
+    </modules>
+
+
+
+</project>
+
+
