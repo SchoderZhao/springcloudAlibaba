@@ -14,7 +14,7 @@ import java.util.Date;
 public class BaseCrudServiceImpl<T extends AbstractBaseDomain, M extends MyMapper<T>> implements BaseCrudService<T> {
 
     @Autowired
-    protected M mapper;
+    public M mapper;
 
     private Class<T> entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 
@@ -68,5 +68,19 @@ public class BaseCrudServiceImpl<T extends AbstractBaseDomain, M extends MyMappe
         PageHelper.startPage(pageNum, pageSize);
         PageInfo<T> pageInfo = new PageInfo<>(mapper.selectByExample(example));
         return pageInfo;
+    }
+
+    @Override
+    public int updateSelective(T domain) {
+        int i = 0;
+        i=mapper.updateByPrimaryKeySelective(domain);
+        return i;
+    }
+
+    @Override
+    public int deleteById(Object id) {
+        int i = 0;
+         i = mapper.deleteByPrimaryKey(id);
+        return i;
     }
 }

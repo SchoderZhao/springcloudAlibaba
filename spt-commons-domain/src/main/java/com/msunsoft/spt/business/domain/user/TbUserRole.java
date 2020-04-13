@@ -1,9 +1,11 @@
 package com.msunsoft.spt.business.domain.user;
 
+import com.msunsoft.spt.business.dto.AbstractBaseDomain;
+
 import javax.persistence.*;
 
 @Table(name = "user.tb_user_role")
-public class TbUserRole {
+public class TbUserRole  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

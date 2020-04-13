@@ -45,4 +45,24 @@ public interface BaseCrudService<T extends AbstractBaseDomain> {
     default PageInfo<T> page(T domain, int pageNum, int pageSize) {
         return null;
     }
+
+    /**
+     * 局部更新
+     *
+     * @param domain
+     * @return
+     */
+    default int updateSelective(T domain) {
+        return 0;
+    }
+
+    /**
+     * 根据id删除
+     *
+     * @param id
+     * @return
+     */
+    default int deleteById(Object id) {
+        return 0;
+    }
 }

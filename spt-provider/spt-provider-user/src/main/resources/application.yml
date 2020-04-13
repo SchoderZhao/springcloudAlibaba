@@ -1,3 +1,8 @@
+base:
+  config:
+    oauth:
+      hostname: localhost
+      port: 9001
 spring:
   application:
     name: spt-provider-user
@@ -11,6 +16,7 @@ spring:
       max-active: 20
       test-on-borrow: true
       driver-class-name: com.mysql.cj.jdbc.Driver
+
   cloud:
     nacos:
       discovery:
@@ -24,7 +30,7 @@ server:
   port: 9502
 
 mybatis:
-    type-aliases-package: com.msunsoft.spt.oauth2.domain.user
+    type-aliases-package: com.msunsoft.spt.business.domain.user
     mapper-locations: classpath:mapper/user/*.xml
 
 management:
@@ -32,3 +38,17 @@ management:
     web:
       exposure:
         include: "*"
+logging:
+  level:
+    com.msunsoft.spt.business.mapper.user: debug
+
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: secret
+      access-token-uri: http://${base.config.oauth.hostname}:${base.config.oauth.port}/oauth/token
+      user-authorization-uri: http://${base.config.oauth.hostname}:${base.config.oauth.port}/oauth/authorize
+    resource:
+      token-info-uri: http://${base.config.oauth.hostname}:${base.config.oauth.port}/oauth/check_token
+

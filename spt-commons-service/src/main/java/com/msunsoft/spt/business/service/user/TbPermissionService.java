@@ -13,4 +13,11 @@ public interface TbPermissionService extends BaseCrudService<TbPermission> {
 
     List<TbPermission> selectByUserId(Long userId);
 
+    /**
+     * 删除惨淡关联角色菜单
+     * @param id
+     * @return
+     */
+    int permissionDelete(long id);
+
 }

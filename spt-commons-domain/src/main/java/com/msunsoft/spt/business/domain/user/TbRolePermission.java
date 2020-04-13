@@ -1,5 +1,7 @@
 package com.msunsoft.spt.business.domain.user;
 
+import com.msunsoft.spt.business.dto.AbstractBaseDomain;
+
 import javax.persistence.*;
 
 @Table(name = "user.tb_role_permission")

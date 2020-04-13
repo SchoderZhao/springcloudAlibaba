@@ -1,10 +1,12 @@
 package com.msunsoft.spt.business.domain.user;
 
+import com.msunsoft.spt.business.dto.AbstractBaseDomain;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Table(name = "user.tb_role")
-public class TbRole {
+public class TbRole extends AbstractBaseDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

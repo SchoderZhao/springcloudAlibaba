@@ -38,7 +38,6 @@ import java.util.Objects;
  * @date 2019-07-29 11:14:58
  * @see com.msunsoft.spt.business.oauth2.controller
  */
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class LoginController {
 
@@ -116,7 +115,6 @@ public class LoginController {
      *
      * @return {@link ResponseResult}
      */
-    @PreAuthorize("hasAuthority('USER')")
     @GetMapping(value = "/user/info")
     public ResponseResult<LoginInfo> info() throws Exception {
         // 获取认证信息
@@ -144,7 +142,6 @@ public class LoginController {
      *
      * @return {@link ResponseResult}
      */
-    @PreAuthorize("hasAuthority('USER')")
     @PostMapping(value = "/user/logout")
     public ResponseResult<Void> logout(HttpServletRequest request) {
         // 获取 token
