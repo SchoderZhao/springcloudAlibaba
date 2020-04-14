@@ -48,6 +48,12 @@ public class UserController {
 
     }
 
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
+
     @DeleteMapping("delete/{id}")
     public ResponseResult<Void> delete(@PathVariable long id) {
 

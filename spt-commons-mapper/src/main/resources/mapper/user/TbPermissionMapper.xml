@@ -30,4 +30,17 @@
       ON p.id = rp.permission_id
       WHERE u.id = ${userId}
     </select>
+
+
+    <select id="selectPermissionByParams" resultType="java.util.HashMap">
+
+      SELECT
+      t1.*,
+      IF(t2.permission_id is NULL,'false', 'true') checked
+      FROM
+      ( SELECT * FROM tb_permission WHERE parent_id =  #{id} ) t1
+      LEFT JOIN ( SELECT permission_id FROM tb_role_permission WHERE role_id = #{roleId} ) t2 ON t1.id = t2.permission_id
+
+
+    </select>
 </mapper>

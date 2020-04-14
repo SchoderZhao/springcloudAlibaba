@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zxl
@@ -28,12 +31,14 @@ public class TbRoleServiceImpl extends BaseCrudServiceImpl<TbRole, TbRoleMapper>
 
     @Autowired
     private TbRoleMapper tbRoleMapper;
+
     @Transactional
     @Override
     public int addTbPermission(long roleId, List<Long> permission) {
         int i=0;
         TbRolePermission tbRolePermission = new TbRolePermission();
         tbRolePermission.setRoleId(roleId);
+        tbRolePermissionMapper.delete(tbRolePermission);
         for (Long aLong : permission) {
             tbRolePermission.setId(null);
             tbRolePermission.setPermissionId(aLong);
@@ -53,11 +58,17 @@ public class TbRoleServiceImpl extends BaseCrudServiceImpl<TbRole, TbRoleMapper>
         TbUserRole tbUserRole=new TbUserRole();
         tbRolePermission.setRoleId(id);
         tbUserRole.setRoleId(id);
-        tbRolePermissionMapper.delete(tbRolePermission);
-        tbUserRoleMapper.delete(tbUserRole);
-        i=tbRoleMapper.deleteByPrimaryKey(id);
-
+        try {
+            tbRolePermissionMapper.delete(tbRolePermission);
+            tbUserRoleMapper.delete(tbUserRole);
+            tbRoleMapper.deleteByPrimaryKey(id);
+            i=1;
+        }catch (Exception e){
+            return 0;
+        }
 
         return i;
     }
+
+
 }

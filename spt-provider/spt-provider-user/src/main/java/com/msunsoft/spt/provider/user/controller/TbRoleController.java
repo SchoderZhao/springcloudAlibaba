@@ -4,10 +4,11 @@ import com.github.pagehelper.PageInfo;
 import com.msunsoft.spt.business.domain.user.TbRole;
 import com.msunsoft.spt.business.dto.ResponseResult;
 import com.msunsoft.spt.business.service.user.TbRoleService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -39,23 +40,23 @@ public class TbRoleController {
         TbRole save = tbRoleService.save(tbRole);
         // 成功
         if (save != null) {
-            return new ResponseResult<TbRole>(ResponseResult.CodeStatus.OK, "新增角色信息成功",save);
+            return new ResponseResult<TbRole>(ResponseResult.CodeStatus.OK, "新增角色信息成功", save);
         }
         // 失败
         else {
-            return new ResponseResult<TbRole>(ResponseResult.CodeStatus.FAIL, "新增角色信息失败",save);
+            return new ResponseResult<TbRole>(ResponseResult.CodeStatus.FAIL, "新增角色信息失败", save);
         }
 
 
     }
 
     @PatchMapping("/update/{id}")
-    public ResponseResult<Void> update(@RequestBody TbRole tbRole,@PathVariable long id) {
+    public ResponseResult<Void> update(@RequestBody TbRole tbRole, @PathVariable long id) {
 
         tbRole.setId(id);
         int i = tbRoleService.updateSelective(tbRole);
         // 成功
-        if (i >0) {
+        if (i > 0) {
             return new ResponseResult<Void>(ResponseResult.CodeStatus.OK, "修改角色信息成功");
         }
         // 失败
@@ -68,6 +69,7 @@ public class TbRoleController {
 
     /**
      * 删除角色
+     *
      * @param id
      * @return
      */
@@ -76,7 +78,7 @@ public class TbRoleController {
 
         int i = tbRoleService.roleDelete(id);
         // 成功
-        if (i >0) {
+        if (i > 0) {
             return new ResponseResult<Void>(ResponseResult.CodeStatus.OK, "删除角色信息成功");
         }
         // 失败
@@ -89,6 +91,7 @@ public class TbRoleController {
 
     /**
      * 角色添加接口
+     *
      * @param roleId
      * @param permission
      * @return
@@ -96,13 +99,15 @@ public class TbRoleController {
 
     @PostMapping(value = "addPermission/{roleId}")
     public ResponseResult<Void> info(@PathVariable long roleId, @RequestBody List<Long> permission) {
-        int i = tbRoleService.addTbPermission(roleId,permission);
-        if(i>0){
+        int i = tbRoleService.addTbPermission(roleId, permission);
+        if (i > 0) {
             return new ResponseResult<Void>(ResponseResult.CodeStatus.OK, "添加接口成功");
-        }else{
+        } else {
             return new ResponseResult<Void>(ResponseResult.CodeStatus.OK, "添加接口失败");
         }
 
     }
+
+
 
 }

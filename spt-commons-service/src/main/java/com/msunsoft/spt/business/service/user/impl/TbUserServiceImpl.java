@@ -55,11 +55,15 @@ public class TbUserServiceImpl extends BaseCrudServiceImpl<TbUser, TbUserMapper>
     public int userDelete(long id) {
         int i = 0;
 
-        i=tbUserMapper.deleteByPrimaryKey(id);
-
-        TbUserRole tbUserRole= new TbUserRole();
-        tbUserRole.setUserId(id);
-        i=tbUserRoleMapper.delete(tbUserRole);
+        try {
+            tbUserMapper.deleteByPrimaryKey(id);
+            TbUserRole tbUserRole= new TbUserRole();
+            tbUserRole.setUserId(id);
+            tbUserRoleMapper.delete(tbUserRole);
+            i=1;
+        }catch (Exception e){
+            return 0;
+        }
 
 
         return i;

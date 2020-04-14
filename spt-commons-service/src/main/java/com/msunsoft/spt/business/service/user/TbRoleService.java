@@ -4,6 +4,7 @@ import com.msunsoft.spt.business.domain.user.TbRole;
 import com.msunsoft.spt.business.service.common.BaseCrudService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zxl
@@ -25,4 +26,6 @@ public interface TbRoleService extends BaseCrudService<TbRole> {
      * @return
      */
     int roleDelete(long id);
+
+
 }

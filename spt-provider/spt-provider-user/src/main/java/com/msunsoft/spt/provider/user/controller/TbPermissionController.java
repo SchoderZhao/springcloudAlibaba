@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zxl
@@ -43,16 +44,16 @@ public class TbPermissionController {
     }
 
     @PostMapping("/insert")
-    public ResponseResult<Void> save(@RequestBody TbPermission tbPermission) {
+    public ResponseResult<TbPermission> save(@RequestBody TbPermission tbPermission) {
 
         TbPermission save = tbPermissionService.save(tbPermission);
         // 成功
         if (save != null) {
-            return new ResponseResult<Void>(ResponseResult.CodeStatus.OK, "新增菜单信息成功");
+            return new ResponseResult<TbPermission>(ResponseResult.CodeStatus.OK, "新增菜单信息成功",save);
         }
         // 失败
         else {
-            return new ResponseResult<Void>(ResponseResult.CodeStatus.FAIL, "新增菜单信息失败");
+            return new ResponseResult<TbPermission>(ResponseResult.CodeStatus.FAIL, "新增菜单信息失败",save);
         }
 
 
@@ -88,6 +89,20 @@ public class TbPermissionController {
             return new ResponseResult<Void>(ResponseResult.CodeStatus.FAIL, "删除菜单信息失败");
         }
 
+
+    }
+
+    /**
+     * 根据角色id获取菜单树
+     *
+     * @param roleId
+     * @return
+     */
+    @GetMapping(value = "loadPermissionList/{roleId}")
+    public ResponseResult<List<Map<String, Object>>> loadResourceList(@PathVariable long roleId) {
+
+        List<Map<String, Object>> maps = tbPermissionService.loadPermissionList(roleId);
+        return new ResponseResult<List<Map<String, Object>>>(ResponseResult.CodeStatus.OK, "根据角色id获取菜单树",maps);
 
     }
 }
